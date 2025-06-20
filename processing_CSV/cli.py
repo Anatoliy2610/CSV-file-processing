@@ -2,9 +2,7 @@ import argparse
 
 
 def common_parser():
-    parser = argparse.ArgumentParser(
-        description="Скрипт обработки CSV файла"
-    )
+    parser = argparse.ArgumentParser(description="Скрипт обработки CSV файла")
     parser.add_argument(
         "-f",
         "--file",

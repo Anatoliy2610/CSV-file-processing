@@ -20,9 +20,25 @@ run:
 	python3 main.py --file tests/fixtures/file1.csv --order_by "rating=desc"
 	python3 main.py --file tests/fixtures/file1.csv --order_by "rating=asc" --where 'brand=xiaomi'
 
-
-ron:
-	python3 main.py --file tests/fixtures/file1.csv --order_by "123=desc"
-
+ruff:
+	ruff check processing_CSV
 
 
+
+
+
+
+install:
+	pip install -r requirements.txt
+
+test:
+	pytest -v
+
+check:
+	ruff check
+
+format:
+	ruff format
+
+ruff:
+	ruff check processing_CSV
