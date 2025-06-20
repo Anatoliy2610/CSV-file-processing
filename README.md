@@ -5,7 +5,7 @@
 Данный скрипт предназначен обработки файлов в формате CSV, который может фильтровать, сортировать и агрегировать данные.
 
 #### Установить проект себе можно, прописав команды в командной строке:
-- `git clone https://github.com/Anatoliy2610/Employee-salary-calculation-script.git`
+- `git clone https://github.com/Anatoliy2610/CSV-file-processing`
 - `make install` (установятся зависимости из файла requirements.txt)
 
 ## Как пользоваться
