@@ -4,7 +4,7 @@ from processing_CSV.builder import get_tabulate
 
 def main():
     args = common_parser()
-    print(get_tabulate(args.file, args.where, args.aggregate))
+    print(get_tabulate(filtering=args.where, aggregate=args.aggregate, file_path=args.file))
 
 
 if __name__ == "__main__":

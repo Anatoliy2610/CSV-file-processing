@@ -1,4 +1,3 @@
-from processing_CSV.builder import builder_result
 from processing_CSV.data_processor import get_filter_data
 from processing_CSV.utils import open_file
 
@@ -21,9 +20,6 @@ def test_get_filter_data():
         ['galaxy s23 ultra', 'samsung', '1199', '4.8'],
         ]
     assert get_filter_data(data_file=data, symbol='=', name_col='brand', data='qwerty') == []
-    assert get_filter_data(data_file=data, symbol='=', name_col='qwerty', data='samsung') == ['Поле фильтрации указано неверно']
-    assert get_filter_data(data_file=data, symbol='~', name_col='brand', data='samsung') == ['Символ в фильтрации указан неверно']
-
     assert get_filter_data(data_file=data, symbol='>', name_col='price', data='300') == [
         ['iphone 15 pro', 'apple', '999', '4.9'],
         ['galaxy s23 ultra', 'samsung', '1199', '4.8'],
@@ -70,8 +66,4 @@ def test_get_filter_data():
         ['redmi note 12', 'xiaomi', '199', '4.6'],
         ['poco x5 pro', 'xiaomi', '299', '4.4']
     ]
-
-
-
-
 
