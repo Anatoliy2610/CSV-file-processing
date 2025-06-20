@@ -1,6 +1,6 @@
 from tabulate import tabulate
 
-from processing_CSV.data_processor import MethodFile, MethodFilter, MethodAggregate
+from processing_CSV.data_processor import MethodFile, MethodFilter, MethodAggregate, MethodOrderBy
 
 class BuilderData:
     def __init__(self, methods: dict):
@@ -9,7 +9,8 @@ class BuilderData:
     def get_builder_data(self):
         data = MethodFile().get_data(file_path=self.methods.get('file_path'))
         data_filter = MethodFilter().get_data(data=data, filter_method=self.methods.get('filtering'))
-        data_aggregate = MethodAggregate().get_data(data=data_filter, aggregate_method=self.methods.get('aggregate'))
+        data_order_by = MethodOrderBy().get_data(data=data_filter, order_by_method=self.methods.get('order_by'))
+        data_aggregate = MethodAggregate().get_data(data=data_order_by, aggregate_method=self.methods.get('aggregate'))
         return data_aggregate
 
 def get_tabulate(**methods) -> str:

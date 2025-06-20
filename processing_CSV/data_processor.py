@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 import csv
 
+
 class Methods(ABC):
     @abstractmethod
-    def get_data(self, data: list, filter_method: str) -> list:
+    def get_data(self):
         pass
 
     def get_symbol_and_value(self, data: str) -> dict:
@@ -17,6 +18,7 @@ class Methods(ABC):
                     'data': split_text[1].lower().strip()
                 }
         return {}
+
 
 class MethodFile(Methods):
     def open_file(self, file_path: str) -> list:
@@ -106,3 +108,33 @@ class MethodAggregate(Methods):
             return [[values.get('data')], aggregate_data]
         return data
 
+
+class MethodOrderBy(Methods):
+    def get_order_by_data(self, data_file: list, order_value: str, name_col: str, symbol: str):
+        if symbol != '=':
+            raise ValueError('Символ сортировки указан неверно')
+        if name_col not in ('price', 'rating'):
+            raise ValueError('Поле сортировки указано неверно')
+        if order_value not in ('asc', 'desc'):
+            raise ValueError('Режим сортировки указан неверно')        
+        for index, col in enumerate(data_file[0]):
+            if col.strip() == name_col:
+                sort_data = data_file[1:]
+                if order_value == 'asc':
+                    sort_data.sort(key=lambda x: float(x[index]))
+                    return sort_data
+                sort_data.sort(key=lambda x: float(x[index]), reverse=True)
+                return sort_data
+                 
+    def get_data(self, data: list, order_by_method: str) -> list:
+        if order_by_method:
+            values = self.get_symbol_and_value(order_by_method)
+            order_by_data = self.get_order_by_data(
+                data_file=data,
+                symbol=values.get('symbol'),
+                name_col=values.get('col_name'),
+                order_value=values.get('data')
+            )
+            data = [data[0]] + order_by_data
+            return data
+        return data

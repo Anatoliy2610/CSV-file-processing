@@ -20,4 +20,9 @@ def common_parser():
         "--aggregate",
         help="условия агрегации",
     )
+    parser.add_argument(
+        "-ord",
+        "--order_by",
+        help="условия сортировки",
+    )
     return parser.parse_args()
